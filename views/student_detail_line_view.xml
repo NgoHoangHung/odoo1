@@ -1,0 +1,27 @@
+<?xml version ='1.0' encoding = "utf-8"?>
+<odoo>
+	<data>
+		<record id='student_detail_line_tree_view1' model='ir.ui.view'>
+			<field name="name">Student Detail Line Tree View</field>
+			<field name="model">student.detail.line</field>
+			<field name="arch" type="xml">
+				<tree string=''>
+					<field name="student_id" />
+					<field name="lecture" />
+					<field name="score1" />
+					<field name="score2" />
+					<field name="state" />
+					<field name="dayoff" />
+				</tree>
+			</field>
+		</record>
+
+		<record id='student_manager_student_detail_line_action'
+			model="ir.actions.act_window">
+			<field name='name'>Student Detail Line</field>
+			<field name='res_model'>student.detail.line</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name='view_mode'>tree</field>
+		</record>
+	</data>
+</odoo>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+	<data>
+		<record id="course_tree_view" model="ir.ui.view">
+			<field name="name">Course Tree View</field>
+			<field name="model">course</field>
+			<field name="arch" type="xml">
+
+				<tree string=''>
+					<field name="name" />
+					<field name="estimate_start" />
+					<field name="description" />
+					<field name="cost" />
+					<field name="unit_num" />
+				</tree>
+			</field>
+		</record>
+		<record id="course_form_view" model="ir.ui.view">
+			<field name="name">Course Code Form View</field>
+			<field name="model">course</field>
+			<field name="arch" type="xml">
+				<form string=''>
+					<sheet string=''>
+						<group>
+							<group>
+								<field name="name" />
+								<field name="estimate_start" />
+								<field name="description" />
+							</group>
+							<group>
+								<field name="cost" />
+								<field name="unit_num" />
+							</group>
+						</group>
+
+						<notebook>
+							<page string="Class List">
+								<field name="class_no_ids">
+									<tree editable='bottom'>
+										<field name='name' />
+										<field name='address' />
+										<field name='teacher_ids' widget="many2many_tags" />
+									</tree>
+								</field>
+							</page>
+						</notebook>
+
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="course_search_view" model="ir.ui.view">
+			<field name="name">Course Search View</field>
+			<field name="model">course</field>
+			<field name="arch" type="xml">
+				<search string="">
+					<field name="name" />
+					<group>
+						<filter string='by Course' name='group_course_id'
+							context="{'group_by':'class_no_ids'}" />
+					</group>
+				</search>
+			</field>
+		</record>
+		<record id="student_manager_course_action"
+			model="ir.actions.act_window">
+			<field name="name">Course</field>
+			<field name="res_model">course</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+	</data>
+</odoo>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+	<data>
+		<record id="class_no_tree_view" model="ir.ui.view">
+			<field name="name">Class Code Tree View</field>
+			<field name="model">class.no</field>
+			<field name="arch" type="xml">
+				<tree string=''>
+					<field name="name" />
+					<field name="address" />
+					<field name="course_id" widget="many2many_tags" />
+					<field name="teacher_ids" />
+					<!-- <field name="amount" widget="many2many_tags" /> -->
+				</tree>
+			</field>
+		</record>
+
+		<record id="class_no_form_view" model="ir.ui.view">
+			<field name="name">Class Code Form View</field>
+
+			<field name="model">class.no</field>
+			<field name="arch" type="xml">
+				<form string=''>
+					<sheet string=''>
+						<group>
+							<group>
+								<field name="name" />
+								<field name="address" />
+								<field name="course_id" />
+								<field name="teacher_ids" />
+							</group>
+						</group>
+						<!--<group> <field name='teacher_ids' widget="many2many_tags" /> </group> -->
+						<notebook>
+							<page string="Class Detail">
+								<field name='class_detail_ids'>
+									<tree editable='bottom'>
+										<field name='name' />
+										<field name='amount' />
+									</tree>
+								</field>
+							</page>
+						</notebook>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<!-- <record id="class_no_search_view" model="ir.ui.view"> -->
+		<!-- <field name="name">Class Code Search View</field> -->
+		<!-- <field name="model">class.no</field> -->
+		<!-- <field name="arch" type="xml"> -->
+		<!-- <search string=""> -->
+		<!-- <field name="name" /> -->
+		<!-- <group> -->
+		<!-- <filter string='by Teacher' name='group_class_no_id' -->
+		<!-- context="{'group_by':'teacher_ids'}" /> -->
+		<!-- </group> -->
+		<!-- </search> -->
+		<!-- </field> -->
+		<!-- </record> -->
+		<record id="student_manager_class_no_action"
+			model="ir.actions.act_window">
+			<field name="name">Class Code</field>
+			<field name="res_model">class.no</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+	</data>
+</odoo>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+	<data>
+		<record id="teacher_tree_view" model="ir.ui.view">
+			<field name="name">Teacher Tree View</field>
+			<field name="model">teacher</field>
+			<field name="arch" type="xml">
+				<tree string=''>
+					<field name="name" />
+					<field name="age" />
+					<field name="gender" />
+					<field name="phone" />
+					<field name="address" />
+					<field name="email" />
+					<field name="password" />
+					<field name="salary" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="teacher_form_view" model="ir.ui.view">
+			<field name="name">Teacher Form View</field>
+			<field name="model">teacher</field>
+			<field name="arch" type="xml">
+				<form string=''>
+					<sheet string=''>
+						<group>
+							<group>
+								<field name="name" />
+								<field name="age" />
+								<field name="gender" />
+								<field name="salary" />
+							</group>
+							<group>
+								<field name="phone" />
+								<field name="address" />
+								<field name="email" />
+							</group>
+						</group>
+<!--						<notebook>-->
+<!--							<page string="Class Manager" name="class_no_lines">-->
+<!--								<field name="class_no_ids">-->
+<!--									<tree string='class'>-->
+<!--										<field name='name' />-->
+<!--										<field name='address' />-->
+<!--										<field name='amount' />-->
+<!--									</tree>-->
+<!--								</field>-->
+<!--							</page>-->
+<!--						</notebook>-->
+					</sheet>
+				</form>
+			</field>
+		</record>
+		<record id="teacher_kanban_view" model="ir.ui.view">
+			<field name="name">Teacher Kanban View</field>
+			<field name="model">teacher</field>
+			<field name="arch" type="xml">
+				<kanban>
+					<field name='name' />
+					<field name="age" />
+					<field name="phone" />
+					<field name="email" />
+					<template>
+						<t t-name="kanban-box">
+							<div t-attf-class="oe_kanban_global_click oe_kanban_content">
+								<div class="oe_kanban_details">
+									<div class="oe_kanban_title">
+										<t t-esc="record.name.value" />
+									</div>
+									<div class="oe_kanban_subtitle">
+										<t t-esc="'Age: ' + record.age.value" />
+									</div>
+									<div class="oe_kanban_subtitle">
+										<t t-esc="'Phone: ' + record.phone.value" />
+									</div>
+									<div class="oe_kanban_subtitle">
+										<t t-esc="'Email: ' + record.email.value" />
+									</div>
+								</div>
+							</div>
+						</t>
+					</template>
+				</kanban>
+			</field>
+		</record>
+
+		<record id="teacher_search_view" model="ir.ui.view">
+			<field name="name">Teacher Search View</field>
+			<field name="model">teacher</field>
+			<field name="arch" type="xml">
+				<search string="">
+					<field name="name" />
+					<field name="phone" />
+					<field name="email" />
+					<group>
+						<filter string='teacher' name='group_teacher_id'
+							context="{'group_by':'address'}" />
+					</group>
+				</search>
+			</field>
+		</record>
+		<record id="student_manager_teacher_action"
+			model="ir.actions.act_window">
+			<field name="name">Teacher</field>
+			<field name="res_model">teacher</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="view_mode">tree,form,kanban</field>
+		</record>
+	</data>
+</odoo>
