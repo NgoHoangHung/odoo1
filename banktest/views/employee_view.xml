@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="employee_tree_view" model="ir.ui.view">
+            <field name="name">Employee Tree View</field>
+            <field name="model">employee</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="active"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="employee_form_view" model="ir.ui.view">
+            <field name="name">Employee Form View</field>
+            <field name="model">employee</field>
+            <field name="arch" type="xml">
+                <form string="" class="o_sale_order">
+                    <header>
+                        <button name="active_deactive" string="Archive" type="object"
+                                class="btn-primary" attrs="{'invisible':[('active','=',True)]}"/>
+                        <button name="active_deactive" string="Unarchive" type="object"
+                                class="btn-primary" attrs="{'invisible':[('active','=',False)]}"/>
+
+                        <button name="%(banktest.employee_leave_reason_action)d" string="Leave"
+                                type="action" />
+<!--                        <button name="leave" string="Leave" type="object" states="0"/>-->
+<!--                        <button name="work" string="Work" type="object" states="1,2,3"/>-->
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="active"/>
+                            <!-- <field name="state" /> -->
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="banktest_employee_action" model="ir.actions.act_window">
+            <field name="name">Employee</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">employee</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="banktest_employee_menu" name="Employee"
+                  parent="banktest.banktest_root_menu" action="banktest_employee_action"
+                  sequence="4"/>
+
+
+    </data>
+</odoo>

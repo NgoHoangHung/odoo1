@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="supplier_tree_view_" model="ir.ui.view">
+            <field name="name">Supplier Tree View</field>
+            <field name="model">supplier</field>
+            <field name="arch" type="xml">
+                <tree string="">
+                    <field name="name"/>
+                    <field name="product_ids" widget='many2many_tags'/>
+                </tree>
+            </field>
+        </record>
+        <record id="supplier_form_view" model="ir.ui.view">
+            <field name="name">Supplier Form View</field>
+            <field name="model">supplier</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="product_ids" widget='many2many_tags'/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--        <record id="supplier_kanban_view" model="ir.ui.view">-->
+        <!--            <field name="name">Supplier Kanban View</field>-->
+        <!--            <field name="model">supplier</field>-->
+        <!--            <field name="arch" type="xml">-->
+        <!--                <kanban string="">-->
+        <!--                    <field name="name"/>-->
+        <!--                    <templates>-->
+        <!--                        <t t-name="kanban-box">-->
+        <!--                            <div class="oe_kanban_content_supplier">-->
+        <!--                                <div class = "oe_kanban_content_supplier"-->
+
+        <!--                            </div>-->
+
+        <!--                        </t>-->
+        <!--                    </templates>-->
+        <!--                </kanban>-->
+        <!--            </field>-->
+        <!--        </record>-->
+
+        <record id="banktest_supplier_action" model="ir.actions.act_window">
+            <field name="name">Supplier</field>
+            <field name="res_model">supplier</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem id="banktest_root_menu" name="Bank Test"/>
+        <menuitem id="banktest_supplier_menu"
+                  name="Supplier"
+                  parent="banktest.banktest_root_menu"
+                  action="banktest_supplier_action"
+                  sequence="2"/>
+    </data>
+
+</odoo>

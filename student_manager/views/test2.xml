@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+	<data>
+		<!-- <record id="action_mask_as_done" -->
+		<!-- model="ir.actions.server"> -->
+		<!-- <field name="name">Mask As Done</field> -->
+		<!-- <field name="model_id" ref="model_test2" /> -->
+		<!-- <field name="binding_model_id" ref="model_test2" /> -->
+		<!-- <field name="binding_view_types">list</field> -->
+		<!-- <field name="state">code</field> -->
+		<!-- <field name="code"> -->
+		<!-- print('hung') -->
+		<!-- </field> -->
+		<!-- </record> -->
+		<record id="test2_tree_view2" model="ir.ui.view">
+			<field name="name">Test2 List View</field>
+			<field name="model">test2</field>
+			<field name="arch" type="xml">
+				<!-- <header> -->
+				<!-- <button name="refresh" string="Refresh" type="object" -->
+				<!-- class="btn-primary" /> -->
+				<!-- </header> -->
+				<tree>
+					<field name="number" />
+					<!--					<field name="plus_test_depends_context" />-->
+					<field name="after" />
+					<field name="avatar" />
+					<field name="currency_id" />
+					<field name="class_fund" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="test2_form_view" model="ir.ui.view">
+			<field name="name">Test2 Form View</field>
+			<field name="model">test2</field>
+			<field name="arch" type="xml">
+				<form>
+					<sheet>
+						<div>
+							<button name='reset_all' string="reset_all" type="object" class="btn-primary" />
+							<button name='plus2' string="plus2" type="object" class="btn-primary" />
+							<button name='only_plus' string="only_plus" type="object" class="btn-primary" />
+						</div>
+						<field name="image" widget="image" />
+						<group>
+							<group>
+								<field name="number" />
+								<field name="after" />
+								<!--								<field name="plus_test_depends_context" />-->
+								<field name="reference" />
+							</group>
+							<group>
+								<field name="avatar" />
+								<field name="currency_id" />
+								<field name="class_fund" />
+							</group>
+						</group>
+						<notebook>
+							<page string="Prescription" name="prescription">
+								<field name="prescription" placeholder="Enter you prescription" options="{'collaborative':true,'resizable':true, 'codeview':true}" />
+							</page>
+
+						</notebook>
+					</sheet>
+				</form>
+
+			</field>
+		</record>
+
+		<record id="test2_kanban_view" model="ir.ui.view">
+			<field name="name">Test2 Kanban View</field>
+			<field name="model">test2</field>
+			<field name="arch" type="xml">
+				<kanban>
+					<field name='avatar' />
+					<field name="image" />
+					<field name="number" />
+					<field name="after" />
+					<field name="id" />
+					<field name="image" />
+					<template>
+						<t t-name="kanban-box">
+							<div t-attf-class="oe_kanban_global_click o_kanban_record_has_image_fill">
+								<div class='o_kanban_image d-none d-md-block' t-attf-style="background-image:url('#{kanban_image('test2','image',record.id.raw_value,placeholder)}')">
+
+
+									<!-- <div t-attf-class="oe_kanban_global_click oe_kanban_content"> -->
+									<!-- <div class='o_kanban_image'> -->
+									<!-- <img class="o_kanban_image_inner_pic" -->
+									<!-- t-att-src="kanban_image('test2','image',record.id.raw_value)" /> -->
+								</div>
+
+								<div class="oe_kanban_details">
+
+									<div class="oe_kanban_title">
+
+										<t t-esc="record.avatar.value" />
+									</div>
+									<div class="oe_kanban_subtitle">
+
+										<t t-esc="'Number: ' + record.number.value" />
+									</div>
+									<div class="oe_kanban_subtitle">
+
+										<t t-esc="'After: ' + record.after.value" />
+									</div>
+								</div>
+							</div>
+						</t>
+					</template>
+				</kanban>
+			</field>
+		</record>
+
+		<record id="test2_action" model="ir.actions.act_window">
+			<field name="name">Test2</field>
+			<field name="res_model">test2</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="view_mode">tree,form,kanban</field>
+		</record>
+	</data>
+</odoo>
+		

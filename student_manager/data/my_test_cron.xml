@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="grow_up_cron" model="ir.cron">
+        <field name="name">grow up test</field>
+        <field name="model_id" ref="model_test2"/>
+        <field name="state">code</field>
+        <field name="code">model.up_number()</field>
+        <field name='interval_number'>1</field>
+        <field name='interval_type'>minutes</field>
+        <field name="numbercall">-1</field>
+    </record>
+</odoo>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="viinschool_category_group_id" model="ir.module.category">
+            <field name="name">ViinSchool</field>
+            <field name="sequence">1</field>
+        </record>
+        <record id="group_viinschool_student" model="res.groups">
+            <field name="name">ViinSchool Student</field>
+            <field name="category_id" ref="student_manager.viinschool_category_group_id"/>
+        </record>
+
+        <record id="group_viinschool_teacher" model="res.groups">
+            <field name="name">ViinSchool Teacher</field>
+            <field name="category_id" ref="student_manager.viinschool_category_group_id"/>
+            <field name="implied_ids" eval="[(4,ref('student_manager.group_viinschool_student'))]"/>
+        </record>
+        <record id="group_viinschool_manager" model="res.groups">
+            <field name="name">ViinSchool Manager</field>
+            <field name="category_id" ref="student_manager.viinschool_category_group_id"/>
+            <field name="implied_ids" eval="[(4,ref('student_manager.group_viinschool_teacher'))]"/>
+        </record>
+        
+    </data>
+</odoo>

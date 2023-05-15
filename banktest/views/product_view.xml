@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="product_kanban_view">
+            <field name="name">Product Kanban View</field>
+            <field name="model">product</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <field name="name"/>
+                    <field name="price"/>
+                    <field name="warranty"/>
+                    <field name="vat"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_global_click o_has_icon oe_kanban_content oe_kanban_car">
+                                <div class="oe_kanban_content">
+                                    <div class="oe_kanban_details">
+                                        <div class="oe_kanban_title">
+                                            <t t-esc="record.name.value"/>
+                                        </div>
+                                        <div class="oe_kanban_subtitle">
+                                            <t t-esc="'Price: ' + record.price.value"/>
+                                        </div>
+                                        <div class="oe_kanban_subtitle">
+                                            <t t-esc="'Warranty: ' + record.warranty.value"/>
+                                        </div>
+                                        <div class="oe_kanban_subtitle">3
+                                            <t t-esc="'VAT: ' + record.vat.value"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+        <record id="product_tree_view" model="ir.ui.view">
+            <field name="name">Product Tree View</field>
+            <field name="model">product</field>
+            <field name="arch" type="xml">
+                <tree string="">
+                    <field name="name"/>
+                    <field name="price"/>
+                    <field name="price_with_tax"/>
+                    <field name="supplier_ids" widget='many2many_tags'/>
+                    <field name="purchase_date"/>
+                    <field name="warranty"/>
+                    <field name="vat"/>
+                    <field name="active"/>
+                </tree>
+            </field>
+        </record>
+        <record id="product_form_view" model="ir.ui.view">
+            <field name="name">Product Form View</field>
+            <field name="model">product</field>
+
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name" string="Product Name"/>
+                                <field name="supplier_ids" widget='many2many_tags'/>
+                                <field name="warranty"/>
+                                <field name="revenue" attrs="{'invisible':[('price','=',0)]}"/>
+                                <field name="amount"/>
+                                <field name="active"/>
+                            </group>
+                            <group>
+                                <field name="purchase_date" attrs="{'invisible':[('price','&gt;=',0)]}"/>
+                                <field name="price"/>
+                                <field name="category_id"/>
+                                <field name="vat" attrs="{'invisible':[('price','=',0)]}"/>
+                                <field name="price_with_tax" attrs="{'invisible':[('price','=',0)]}"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="product_search_view" model="ir.ui.view">
+            <field name="name">Product Search View</field>
+            <field name="model">product</field>
+            <field name="arch" type="xml">
+                <search string="">
+                    <field name="name"/>
+                    <field name="purchase_date"/>
+                    <field name="supplier_ids"/>
+                    <field name="category_id"/>
+                    <group>
+                        <filter string='category' name='group_category_id'
+                                context="{'group_by':'category_id'}"/>
+                    </group>
+                </search>
+            </field>
+
+        </record>
+        <!-- <record model="ir.ui.view" id="product_calendar_view">
+            <field name="name">product.calendar</field>
+            <field name="model">product</field>
+            <field name="arch" type="xml">
+                <calendar string="Product Calendar" date_start="purchase_date" color="purchase_date">
+                    <field name="name"/>
+                    <field name="purchase_date"/>
+                    <field name="warranty"/>
+                    <field name="supplier_ids"/>
+                </calendar>
+            </field>
+        </record> -->
+
+        <record id="banktest_product_action" model="ir.actions.act_window">
+            <field name="name">Products</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product</field>
+            <field name="view_mode">tree,kanban,form</field>
+        </record>
+
+        <menuitem id="banktest_root_menu" name="Bank Test"/>
+        <menuitem id="banktest_product_menu"
+                  name="Products"
+                  parent="banktest.banktest_root_menu"
+                  action="banktest_product_action"
+                  sequence="1"/>
+
+    </data>
+</odoo>
