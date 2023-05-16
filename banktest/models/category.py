@@ -6,8 +6,10 @@ class Category(models.Model):
 
     name = fields.Char(string='Category')
     description = fields.Char(string="Description")
-    product_ids = fields.One2many(comodel_name='product', inverse_name='category_id', string='Product')
-    product_count = fields.Integer(compute='get_product_count', string='Product Count', store=True)
+    product_ids = fields.One2many(
+        comodel_name='product', inverse_name='category_id', string='Product')
+    product_count = fields.Integer(
+        compute='get_product_count', string='Product Count', store=True)
 
     @api.depends('product_ids')
     def get_product_count(self):
@@ -29,7 +31,7 @@ class Category(models.Model):
     def action_product(self):
         return {
             'type': 'ir.actions.act_window',
-            'name': _('List Product'),
+            'name': ('List Product'),
             'res_model': 'product',
             'view_type': 'form',
             'view_mode': 'list,form',

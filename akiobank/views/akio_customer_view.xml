@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="list_view_akio_customer" model="ir.ui.view">
+            <field name="name">Akio Customer Tree View</field>
+            <field name="model">akio.customer</field>
+            <field name="arch" type="xml">
+                <tree>
+
+                    <field name="name"/>
+                    <field name="age"/>
+                    <field name="address"/>
+                    <field name="gender"/>
+                    <field name="phone"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="form_view_akio_customer" model="ir.ui.view">
+            <field name="name">Akio Customer Form View</field>
+            <field name="model">akio.customer</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="%(akiobank.akio_sendmoney_trans_action)d" string="Send Money" type="action" />
+                    </header>
+                    <sheet>
+                        <group >
+                            <field name="name"/>
+                            <field name="age"/>
+                            <field name="address"/>
+                            <field name="gender"/>
+                            <field name="phone"/>
+                        </group>
+                        <notebook>
+                            <page string="My History">
+                                <field name="history_ids">
+                                    <tree editable='bottom'>
+                                        <field name="name" readonly = "1"/>
+                                        <field name="trans_type" readonly = "1"/>
+                                        <field name="deposit" readonly = "1"/>
+                                        <field name="creat_at"  readonly = "1"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="akiobank_customer_view_action" model="ir.actions.act_window">
+            <field name="name">Akio Customer Bank</field>
+            <field name="res_model">akio.customer</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+    </data>
+
+</odoo>

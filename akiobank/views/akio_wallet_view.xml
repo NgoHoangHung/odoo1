@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="list_view_wallet" model="ir.ui.view">
+            <field name="name">Wallet Tree View</field>
+            <field name="model">wallet</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="accountnumber"/>
+                    <field name="akio_customer_id"/>
+                    <field name="bank_name"/>
+                    <field name="balance"/>
+                </tree>
+            </field>
+        </record>
+        <record id="form_view_wallet" model="ir.ui.view">
+            <field name="name">Wallet Form View</field>
+            <field name="model">wallet</field>
+            <field name="arch" type = "xml">
+                <form>
+                    <sheet>
+                        <group >
+                            <group >
+                                <field name="akio_customer_id" />
+                                <field name="bank_name"/>
+                            </group>
+                            <group >
+                                <field name="accountnumber"/>
+                                <field name="password"/>
+                                <field name="balance"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="akiobank_wallet_view_action" model="ir.actions.act_window">
+            <field name="name">Wallet</field>
+            <field name="res_model">wallet</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+    </data>
+
+
+
+</odoo>

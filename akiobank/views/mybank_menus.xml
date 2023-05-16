@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<menuitem id="akiobank_root_menu" name="Akio Bank">
+
+		<menuitem id="customer_menu" name="Customer" sequence="1">
+
+			<menuitem id="akiobank_customer_menu" name="Customer List" action="akiobank_customer_view_action" sequence="1" />
+
+		</menuitem>
+
+		<menuitem id="wallet_menu" name="Wallet" sequence="2">
+			<menuitem id="akiobank_wallet_menu" name="Wallet List" action="akiobank_wallet_view_action" sequence="1" />
+		</menuitem>
+
+		<menuitem id="transaction_history_menu" name="Transaction History" sequence="3">
+			<menuitem id="akiobank_transaction_history_menu" name="Transaction History List" action="akiobank_trans_history_view_action" sequence="1" />
+		</menuitem>
+	</menuitem>
+
+
+</odoo>

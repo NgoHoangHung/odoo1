@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="list_view_trans_history" model="ir.ui.view">
+            <field name="name">Trans History Tree View</field>
+            <field name="model">trans.history</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="trans_type"/>
+                    <field name="deposit"/>
+                    <field name="creat_at" readonly="1"/>
+                    <field name="wallet_id" />
+                    <field name="akio_customer_id"/>
+
+                </tree>
+            </field>
+        </record>
+        <record id="form_view_wallet" model="ir.ui.view">
+            <field name="name">Trans History Form View</field>
+            <field name="model">trans.history</field>
+            <field name="arch" type = "xml">
+                <form>
+                    <sheet>
+                        <group >
+                            <field name="name"/>
+                            <field name="trans_type"/>
+                            <field name="deposit"/>
+                            <field name="creat_at" />
+                            <field name="wallet_id" />
+                            <field name="akio_customer_id" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="akiobank_trans_history_view_action" model="ir.actions.act_window">
+            <field name="name">Transaction History</field>
+            <field name="res_model">trans.history</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+    </data>
+
+
+
+</odoo>
