@@ -30,6 +30,18 @@
                                 <field name="balance"/>
                             </group>
                         </group>
+                        <notebook>
+                            <page string="Lịch Sử ">
+                                <field name="transaction_history_ids">
+                                    <tree editable = 'bottom'>
+                                        <field name="creat_at"/>
+                                        <field name="wallet_id"/>
+                                        <field name="deposit"/>
+                                        <field name="trans_type"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
                     </sheet>
                 </form>
             </field>

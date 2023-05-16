@@ -12,15 +12,16 @@ class AkioTransaction(models.TransientModel):
     def sendmoney(self):
         receiver_wallet = self.env['wallet'].search(
             [('akio_customer_id.id', '=', self.customer_receive.id)])
-        receiver_wallet.balance = receiver_wallet.balance+self.deposit
+        sender_wallet = self.env['wallet'].search(
+            [('akio_customer_id.id', '=', self._context.get('active_id'))])
+        receiver_wallet.balance = receiver_wallet.balance + self.deposit
+        sender_wallet.balance = sender_wallet.balance - self.deposit
 
     @api.onchange('account_number')
     def _onchange_account_number(self):
         domain = {'customer_receive': [
             ('id', '=', self.account_number.akio_customer_id.id)]}
         return {'domain': domain}
-
-
 
     # bank_name = fields.Selection([('bidv', 'BIDV'),
     #                               ('vtb', 'Viettin Bank'),

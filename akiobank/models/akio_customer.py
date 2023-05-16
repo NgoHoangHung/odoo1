@@ -16,10 +16,10 @@ class AkioCustomer(models.Model):
                                  inverse_name="akio_customer_id",
                                  string="Ví"
                                  )
-    history_ids = fields.One2many(comodel_name="trans.history",
-                                  inverse_name="akio_customer_id",
-                                  string="Lịch Sử"
-                                  )
+    # history_ids = fields.One2many(comodel_name="trans.history",
+    #                               inverse_name="akio_customer_id",
+    #                               string="Lịch Sử"
+    #                               )
     _sql_constraints = [
         ('name_uniq', 'unique(phone)', 'Khách hàng chỉ có một số điện thoại'),
         # ('price_pos', 'CHECK(price >=0)', 'Product price must be positive!')

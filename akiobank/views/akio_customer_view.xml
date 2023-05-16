@@ -33,13 +33,13 @@
                             <field name="phone"/>
                         </group>
                         <notebook>
-                            <page string="My History">
-                                <field name="history_ids">
+                            <page string="My Wallet">
+                                <field name="wallet_ids">
                                     <tree editable='bottom'>
-                                        <field name="name" readonly = "1"/>
-                                        <field name="trans_type" readonly = "1"/>
-                                        <field name="deposit" readonly = "1"/>
-                                        <field name="creat_at"  readonly = "1"/>
+                                        <field name="bank_name" readonly = "1"/>
+                                        <field name="accountnumber" readonly = "1"/>
+                                        <field name="balance" readonly = "1"/>
+                                        <field name="password"  readonly = "1"/>
                                     </tree>
                                 </field>
                             </page>
