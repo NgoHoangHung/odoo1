@@ -19,8 +19,7 @@ class TransHistory(models.Model):
     creat_at = fields.Datetime(
         string="Ngày giao dịch", default=lambda self: fields.Datetime.now())
     wallet_id = fields.Many2one("wallet", string="Ví")
-    # akio_customer_id = fields.Many2one("akio.customer",
-    #                                    string="Khách Hàng")
+    partner_id = fields.Char("Đối Tác")
 
     @api.constrains('name', 'description')
     def _check_description(self):

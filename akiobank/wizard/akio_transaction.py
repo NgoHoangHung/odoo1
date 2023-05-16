@@ -10,12 +10,42 @@ class AkioTransaction(models.TransientModel):
     account_number = fields.Many2one('wallet', string="Số Tài Khoản")
 
     def sendmoney(self):
+        
         receiver_wallet = self.env['wallet'].search(
             [('akio_customer_id.id', '=', self.customer_receive.id)])
+        
         sender_wallet = self.env['wallet'].search(
             [('akio_customer_id.id', '=', self._context.get('active_id'))])
+        
         receiver_wallet.balance = receiver_wallet.balance + self.deposit
+       
         sender_wallet.balance = sender_wallet.balance - self.deposit
+
+        self.ensure_one()
+        
+        receiver_history={
+            'trans_type':'1',
+            'deposit':  self.deposit,
+            'creat_at': fields.Datetime.now(),
+            'partner_id': sender_wallet.akio_customer_id.name
+            # 'wallet_id': sender_wallet
+        }
+        receiver_wallet.write({
+         'transaction_history_ids':[(0,0,receiver_history)] 
+        })
+
+        sender_history={
+            'trans_type':'0',
+            'deposit':  self.deposit,
+            'creat_at': fields.Datetime.now(),
+            'partner_id': receiver_wallet.akio_customer_id.name
+            # 'wallet_id': receiver_wallet
+        }
+        sender_wallet.write({
+         'transaction_history_ids':[(0,0,sender_history)] 
+        })
+
+
 
     @api.onchange('account_number')
     def _onchange_account_number(self):

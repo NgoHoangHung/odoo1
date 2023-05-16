@@ -24,7 +24,7 @@
                             <field name="trans_type"/>
                             <field name="deposit"/>
                             <field name="creat_at" />
-                            <field name="wallet_id" />
+                            <field name="partner_id" />
                         </group>
                     </sheet>
                 </form>

@@ -13,7 +13,7 @@
                 </tree>
             </field>
         </record>
-        <record id="form_view_wallet" model="ir.ui.view">
+        <record id="form_view_akio_wallet" model="ir.ui.view">
             <field name="name">Wallet Form View</field>
             <field name="model">wallet</field>
             <field name="arch" type = "xml">
@@ -35,7 +35,7 @@
                                 <field name="transaction_history_ids">
                                     <tree editable = 'bottom'>
                                         <field name="creat_at"/>
-                                        <field name="wallet_id"/>
+                                        <field name="partner_id"/>
                                         <field name="deposit"/>
                                         <field name="trans_type"/>
                                     </tree>
