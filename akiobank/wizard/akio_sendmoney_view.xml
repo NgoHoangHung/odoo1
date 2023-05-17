@@ -10,6 +10,7 @@
                         <field name="customer_receive" />
                         <field name="account_number" />
                         <field name="deposit" required='1'/>
+                        <field name="content_trans" />
                     </group>
                     <footer>
                         <button string="send" type="object" name="sendmoney" class="btn-primary" />

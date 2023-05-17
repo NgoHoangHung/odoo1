@@ -11,7 +11,7 @@
     'website': '',
     'depends': [],
     'data': [
-        'wizard/akio_transaction_view.xml',
+        'wizard/akio_sendmoney_view.xml',
         
         'views/akio_customer_view.xml',
         'views/akio_wallet_view.xml',

@@ -31,7 +31,7 @@ class Category(models.Model):
     def action_product(self):
         return {
             'type': 'ir.actions.act_window',
-            'name': ('List Product'),
+            'name': _('List Product'),
             'res_model': 'product',
             'view_type': 'form',
             'view_mode': 'list,form',

@@ -8,6 +8,7 @@ class AkioTransaction(models.TransientModel):
     customer_receive = fields.Many2one(comodel_name="akio.customer",
                                        string="Người Nhận")
     account_number = fields.Many2one('wallet', string="Số Tài Khoản")
+    content_trans = fields.Text("Nội Dung Giao Dịch")
 
     def sendmoney(self):
         
@@ -21,14 +22,14 @@ class AkioTransaction(models.TransientModel):
        
         sender_wallet.balance = sender_wallet.balance - self.deposit
 
-        self.ensure_one()
+        # self.ensure_one()
         
         receiver_history={
             'trans_type':'1',
             'deposit':  self.deposit,
             'creat_at': fields.Datetime.now(),
-            'partner_id': sender_wallet.akio_customer_id.name
-            # 'wallet_id': sender_wallet
+            'partner_id': sender_wallet.akio_customer_id.name,
+            'content_trans': self.content_trans
         }
         receiver_wallet.write({
          'transaction_history_ids':[(0,0,receiver_history)] 
@@ -38,8 +39,8 @@ class AkioTransaction(models.TransientModel):
             'trans_type':'0',
             'deposit':  self.deposit,
             'creat_at': fields.Datetime.now(),
-            'partner_id': receiver_wallet.akio_customer_id.name
-            # 'wallet_id': receiver_wallet
+            'partner_id': receiver_wallet.akio_customer_id.name,
+            'content_trans': self.content_trans
         }
         sender_wallet.write({
          'transaction_history_ids':[(0,0,sender_history)] 

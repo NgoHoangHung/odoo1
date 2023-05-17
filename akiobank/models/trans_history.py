@@ -20,6 +20,7 @@ class TransHistory(models.Model):
         string="Ngày giao dịch", default=lambda self: fields.Datetime.now())
     wallet_id = fields.Many2one("wallet", string="Ví")
     partner_id = fields.Char("Đối Tác")
+    content_trans = fields.Text("Nội Dung Giao Dịch")
 
     @api.constrains('name', 'description')
     def _check_description(self):
