@@ -24,7 +24,7 @@
                     </sheet>
                 </form>
             </field>
-        </record>
+        </record>	
 
         <!--        <record id="supplier_kanban_view" model="ir.ui.view">-->
         <!--            <field name="name">Supplier Kanban View</field>-->
@@ -41,7 +41,7 @@
 
         <!--                        </t>-->
         <!--                    </templates>-->
-        <!--                </kanban>-->
+        <!--                </kanban>-->	
         <!--            </field>-->
         <!--        </record>-->
 

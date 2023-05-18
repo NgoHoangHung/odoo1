@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="view_graph_akio_schedule" model="ir.ui.view">
+			<field name="name">Graph View Akio Schedule</field>
+			<field name="model">akio.schedule</field>
+			<field name="arch" type="xml">
+				<graph string="Schedule Graph" type="bar">
+					<field name="name" />
+				</graph>
+			</field>
+		</record>
+		<record id="tree_view_akio_schedule" model="ir.ui.view">
+			<field name="name">Tree View Akio Schedule</field>
+			<field name="model">akio.schedule</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="name" />
+					<field name="create_at" />
+					<field name="estimate_at" />
+					<field name="wallet_id" />
+					<field name="akio_interest_rate" />
+				</tree>
+			</field>
+		</record>
+		<record id="form_view_akio_schedule" model="ir.ui.view">
+			<field name="name">Form View Akio Schedule</field>
+			<field name="model">akio.schedule</field>
+			<field name="arch" type="xml">
+				<form>
+					<header>
+						<button name="akio_debug" string="Debug" type="object"
+							class="btn-primary" />
+						<button name="akio_date" string="Today" type="object"
+							class="btn-primary" />
+						<button name="akio_add" string="Add" type="object"
+							class="btn-primary" />
+						<button name="akio_context_today" string="Context Today" type="object"
+							class="btn-primary" />
+					</header>
+					<sheet>
+						<group>
+							<group>
+								<field name="name" />
+								<field name="wallet_id" />
+								<field name="akio_interest_rate" />
+							</group>
+							<group>
+								<field name="create_at" />
+								<field name="estimate_at" />
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+
+		<record id="calendar_view_akio_schedule" model="ir.ui.view">
+			<field name="name">Calendar View Akio Schedule</field>
+			<field name="model">akio.schedule</field>
+			<field name="arch" type="xml">
+				<calendar string="Schedule Calendar" date_start="create_at"
+					date_stop="estimate_at" color="wallet_id">
+					<field name="name" />
+					<field name="create_at" />
+					<field name="estimate_at" />
+					<field name="wallet_id" />
+					<field name="akio_interest_rate" />
+				</calendar>
+			</field>
+		</record>
+
+		<record id="akiobank_schedule_view_action"
+			model="ir.actions.act_window">
+			<field name="name">Schedule</field>
+			<field name="res_model">akio.schedule</field>
+			<field name="view_mode">tree,form,calendar,graph</field>
+
+		</record>
+
+	</data>
+</odoo>

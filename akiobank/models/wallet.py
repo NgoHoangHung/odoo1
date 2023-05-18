@@ -19,17 +19,19 @@ class Wallet(models.Model):
                                        string="Khách Hàng")
 
     transaction_history_ids = fields.One2many('trans.history', inverse_name="wallet_id", string = "Lịch sử giao dịch")
+    
+    akio_schedule_ids = fields.One2many(
+        comodel_name = 'akio.schedule',
+        inverse_name = 'wallet_id',
+        string = "Schedule"
+        )
 
     @api.depends('bank_name', 'akio_customer_id.phone')
     def accountnumber_gen(self):
         for record in self:
             self.accountnumber = str(self.bank_name) + str(self.akio_customer_id.phone)
-
-    # state = fields.Selection(string = "Loại Tài Khoản",
-    #                          selection=[
-    #                              ('0','Tài Khoản Thông Thường'),
-    #                              ('1','Tài Khoản Tiết Kiệm'),
-    #                              ('2','Thẻ Thanh Toán')
-    #                          ],
-    #                          default = '0'
-    #                          )
+    
+    def is_cal(self):
+        return True if self.balance > 0 else False
+    
+   

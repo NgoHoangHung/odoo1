@@ -16,6 +16,7 @@
         'views/akio_customer_view.xml',
         'views/akio_wallet_view.xml',
         'views/akio_trans_history_view.xml',
+        'views/akio_schedule_view.xml',
 
         'views/mybank_menus.xml',
     ],
