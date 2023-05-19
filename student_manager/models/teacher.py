@@ -23,9 +23,9 @@ class Teacher(models.Model):
 
     @api.model
     def create(self, vals):
-        for field in ['name', 'address']:
-            if field in vals:
-                vals[field] = vals[field].title()
+        # for field in ['name', 'address']:
+        #     if field in vals:
+        #         vals[field] = vals[field].title()
         record = super(Teacher, self).create(vals)
         return record
 

@@ -52,6 +52,7 @@ class AkioCustomer(models.Model):
     def copy(self, default=None):
         default = dict(default or {})
         if default.get('name', False):
+            print('up')
             return super(AkioCustomer, self).copy(default)
         try:
             default.setdefault('name', _("%s (copy)") % (self.name or ''))
@@ -59,6 +60,7 @@ class AkioCustomer(models.Model):
                 default['name'] = _("%s (copy)") % (self.name or '')
         except ValueError:
             default['name'] = self.name
+        print('down')
         return super(AkioCustomer, self).copy(default)
 
     @api.model
@@ -344,6 +346,8 @@ class AkioCustomer(models.Model):
         print(recordset.sorted(key=None, reverse=True))
         print('-------------------------------------------')
         print(recordset.sorted(key='name', reverse=True))
+        
+    
     # ===========================================================================
     # #===========================================================================
     # # #===========================================================================

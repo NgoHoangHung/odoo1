@@ -5,10 +5,12 @@
 			<field name="name">Akio Customer Tree View</field>
 			<field name="model">akio.customer</field>
 			<field name="arch" type="xml">
-				<!--				<header>-->
-				<!--					<button name="change_customer_type" string="VIP" type="object" class="btn-primary" />-->
-				<!--					<button name="akio_unlink" string="Unlink" type="object" class="btn-primary" />-->
-				<!--				</header>-->
+				<!-- <header> -->
+				<!-- <button name="change_customer_type" string="VIP" type="object" class="btn-primary" 
+					/> -->
+				<!-- <button name="akio_unlink" string="Unlink" type="object" class="btn-primary" 
+					/> -->
+				<!-- </header> -->
 				<tree>
 					<field name="name" />
 					<field name="age" />
@@ -27,35 +29,59 @@
 				<form>
 					<header>
 						<div>
-							<button name="%(akiobank.akio_sendmoney_trans_action)d" string="Send Money" type="action" />
-							<button name="akio_debug" string="Debug" type="object" class="btn-primary" />
-							<!--							<button name="name_create" string="!Name Creat" type="object" class="btn-primary" />-->
-							<button name="copy" string="Copy" type="object" class="btn-primary" />
-							<button name="akio_browse" string="Browse" type="object" class="btn-primary" />
-							<button name="akio_find_all" string="Find All" type="object" class="btn-primary" />
-							<button name="akio_read" string="Read" type="object" class="btn-primary" />
+							<button name="%(akiobank.akio_sendmoney_trans_action)d"
+								string="Send Money" type="action" />
+							<button name="akio_debug" string="Debug" type="object"
+								class="btn-primary" />
+							<!-- <button name="name_create" string="!Name Creat" type="object" 
+								class="btn-primary" /> -->
+							<button name="copy" string="Copy" type="object"
+								class="btn-primary" />
+							<button name="akio_browse" string="Browse" type="object"
+								class="btn-primary" />
+							<button name="akio_find_all" string="Find All"
+								type="object" class="btn-primary" />
+							<button name="akio_read" string="Read" type="object"
+								class="btn-primary" />
 
-							<button name="akio_read_group" string="Read Group" type="object" class="btn-primary" />
+							<button name="akio_read_group" string="Read Group"
+								type="object" class="btn-primary" />
 							<br>
 							</br>
-							<button name="akio_search_count" string="Search Count" type="object" class="btn-primary" />
-							<button name="find_by_domain0" string="Search =" type="object" class="btn-primary" />
-							<button name="find_by_domain1" string="Search !=" type="object" class="btn-primary" />
-							<button name="find_by_domain2" string="Search >" type="object" class="btn-primary" />
-							<button name="find_by_domain3" string="Search >=" type="object" class="btn-primary" />
-							<button name="find_by_domain4" string="Search =?" type="object" class="btn-primary" />
-							<button name="find_by_domain5" string="Search =like" type="object" class="btn-primary" />
+							<button name="akio_search_count" string="Search Count"
+								type="object" class="btn-primary" />
+							<button name="find_by_domain0" string="Search ="
+								type="object" class="btn-primary" />
+							<button name="find_by_domain1" string="Search !="
+								type="object" class="btn-primary" />
+							<button name="find_by_domain2" string="Search >"
+								type="object" class="btn-primary" />
+							<button name="find_by_domain3" string="Search >="
+								type="object" class="btn-primary" />
+							<button name="find_by_domain4" string="Search =?"
+								type="object" class="btn-primary" />
+							<button name="find_by_domain5" string="Search =like"
+								type="object" class="btn-primary" />
 							<br>
 							</br>
-							<button name="akio_fields_get" string="Fields Get" type="object" class="btn-primary" />
-							<button name="akio_ids" string="Ids" type="object" class="btn-primary" />
-							<button name="akio_exists" string="Exists" type="object" class="btn-primary" />
-							<button name="akio_name_get" string="Name Get" type="object" class="btn-primary" />
-							<button name="akio_get_metadata" string="Get Metadata" type="object" class="btn-primary" />
-							<button name="akio_filtered" string="Filtered" type="object" class="btn-primary" />
-							<button name="akio_filtered_domain" string="Filtered Domain" type="object" class="btn-primary" />
-							<button name="akio_mapped" string="Map" type="object" class="btn-primary" />
-							<button name="akio_sort" string="Sort" type="object" class="btn-primary" />
+							<button name="akio_fields_get" string="Fields Get"
+								type="object" class="btn-primary" />
+							<button name="akio_ids" string="Ids" type="object"
+								class="btn-primary" />
+							<button name="akio_exists" string="Exists" type="object"
+								class="btn-primary" />
+							<button name="akio_name_get" string="Name Get"
+								type="object" class="btn-primary" />
+							<button name="akio_get_metadata" string="Get Metadata"
+								type="object" class="btn-primary" />
+							<button name="akio_filtered" string="Filtered"
+								type="object" class="btn-primary" />
+							<button name="akio_filtered_domain"
+								string="Filtered Domain" type="object" class="btn-primary" />
+							<button name="akio_mapped" string="Map" type="object"
+								class="btn-primary" />
+							<button name="akio_sort" string="Sort" type="object"
+								class="btn-primary" />
 							<br></br>
 
 						</div>
@@ -105,24 +131,26 @@
 			<field name="model">akio.customer</field>
 			<field name="arch" type="xml">
 				<pivot string="Akio Customer" sample="1">
-					<field name="name" type="row"/>
+					<field name="name" type="row" />
 				</pivot>
 			</field>
 		</record>
-		
+
 		<record id="view_search_akio_customer" model="ir.ui.view">
 			<field name="name">Search View Akio Customer</field>
 			<field name="model">akio.customer</field>
 			<field name="arch" type="xml">
 				<search string="Akio Customer">
-					<field name="name" filter_domain="[('name','ilike',self)]" string="Customer"/>
-					<separator/>
-                    <filter name="vip_customer" string="VIP" domain="[('vip_customer', '=', False)]"/>
-					 <group>
+					<field name="name" filter_domain="[('name','ilike',self)]"
+						string="Customer" />
+					<separator />
+					<filter name="vip_customer" string="VIP"
+						domain="[('vip_customer', '=', False)]" />
+					<group>
 						<filter string='Gender' name='group_customer_id'
 							context="{'group_by':'gender'}" />
-					</group> 
-					
+					</group>
+
 				</search>
 			</field>
 		</record>
@@ -160,7 +188,8 @@
 			</field>
 		</record>
 
-		<record id="akiobank_customer_view_action" model="ir.actions.act_window">
+		<record id="akiobank_customer_view_action"
+			model="ir.actions.act_window">
 			<field name="name">Akio Customer Bank</field>
 			<field name="res_model">akio.customer</field>
 			<field name="view_mode">tree,form,kanban,graph,pivot,search</field>

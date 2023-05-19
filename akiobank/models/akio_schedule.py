@@ -14,14 +14,14 @@ class AkioSchedule(models.Model):
     create_at = fields.Datetime(# Override of default create_date field from ORM
         string="Begin",
         index=True,
-        copy=False
-        # default=fields.DateTime.now()
+        copy=False,
+        default=fields.Datetime.now()
         )
     
     estimate_at = fields.Datetime(
         string="Estimate End",
         copy=False,
-        # default=fields.DateTime.now(),
+        default=fields.Datetime.now(),
         help="This is the my schedule.")
     
     akio_interest_rate = fields.Float(
@@ -29,9 +29,14 @@ class AkioSchedule(models.Model):
     
     wallet_id = fields.Many2one(
         comodel_name='wallet',
-        string="Wallet"
+        string="Wallet",
+        ondelete = 'restrict'
         )
-
+    
+    @api.model_create_multi
+    def create(self, vals):
+        return super(AkioSchedule, self).create(vals) 
+    
     #===========================================================================
     # akio_debug
     #===========================================================================

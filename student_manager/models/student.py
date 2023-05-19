@@ -27,13 +27,13 @@ class Student(models.Model):
 
     # class_id = fields.Many2one(comodel_name='class.no', string="Class")
 
-    @api.model
-    def create(self, vals):
-        for field in ['name', 'address', 'email']:
-            if field in vals:
-                vals[field] = vals[field].title()
-        record = super(Student, self).create(vals)
-        return record
+    # @api.model
+    # def create(self, vals):
+    #     for field in ['name', 'address', 'email']:
+    #         if field in vals:
+    #             vals[field] = vals[field].title()
+    #     record = super(Student, self).create(vals)
+    #     return record
 
     def test_create_command0(self):
         self.ensure_one()
@@ -51,14 +51,21 @@ class Student(models.Model):
     # ===========================================================================
     def test_update_command1(self):
         # records = self.env['student.detail.line']
-        edit_fields = {
-            'score1': 5.4,
-            'state': '1'
-        }
-        # id_search = records.search(['id','=','active_id']).id
-        self.write({
-            'student_detail_line_ids': [(1, 2, edit_fields)]
-        })
+        # edit_fields = {
+        #     'score1': 5.4,
+        #     'state': '1'
+        # }
+        # # id_search = records.search(['id','=','active_id']).id
+        # self.write({
+        #     'student_detail_line_ids': [(1, 2, edit_fields)]
+        # })
+        
+        
+        
+        pass
+        
+        
+       
 
     # ===========================================================================
     # test_delete_command2
