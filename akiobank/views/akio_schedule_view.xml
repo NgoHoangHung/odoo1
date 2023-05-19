@@ -29,14 +29,41 @@
 			<field name="arch" type="xml">
 				<form>
 					<header>
-						<button name="akio_debug" string="Debug" type="object"
-							class="btn-primary" />
-						<button name="akio_date" string="Today" type="object"
-							class="btn-primary" />
-						<button name="akio_add" string="Add" type="object"
-							class="btn-primary" />
-						<button name="akio_context_today" string="Context Today" type="object"
-							class="btn-primary" />
+						<div>
+							<button name="akio_debug" string="DateDebug" type="object"
+								class="btn-primary" />
+							<button name="akio_date" string="Today" type="object"
+								class="btn-primary" />
+							<button name="akio_add" string="Add" type="object"
+								class="btn-primary" />
+							<button name="akio_subtract" string="Subtract"
+								type="object" class="btn-primary" />
+							<button name="akio_context_today" string="Context Today"
+								type="object" class="btn-primary" />
+							<button name="akio_to_date" string="To Date" type="object"
+								class="btn-primary" />
+							<button name="akio_to_string" string="To String"
+								type="object" class="btn-primary" />
+							<button name="akio_start_of" string="Start Of"
+								type="object" class="btn-primary" />
+							<button name="akio_end_of" string="End Of" type="object"
+								class="btn-primary" />
+							<button name="akio_relativedelta" string="Relativedelta"
+								type="object" class="btn-primary" />
+							<br>
+							</br>
+							<button name="akio_add_dt" string="DateTime Add"
+								type="object" class="btn-primary" />
+							<button name="akio_context_time" string="Context Time"
+								type="object" class="btn-primary" />
+							<button name="akio_end_of_dt" string="End of"
+								type="object" class="btn-primary" />
+							<button name="akio_to_datetime" string="To DateTime"
+								type="object" class="btn-primary" />
+							<button name="akio_today_datetime" string="Today"
+								type="object" class="btn-primary" />
+
+						</div>
 					</header>
 					<sheet>
 						<group>
