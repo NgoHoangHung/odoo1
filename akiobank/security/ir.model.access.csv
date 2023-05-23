@@ -1,0 +1,17 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+akiobank_customer_customer,akiobank_customer_customer,model_akio_customer,akiobank.group_akiobank_customer,1,0,0,0
+akiobank_customer_employee,akiobank_customer_employee,model_akio_customer,akiobank.group_akiobank_employee,1,0,1,0
+akiobank_customer_manager,akiobank_customer_manager,model_akio_customer,akiobank.group_akiobank_manager,1,1,1,1
+
+akiobank_wallet_customer,akiobank_wallet_customer,model_wallet,akiobank.group_akiobank_customer,1,0,0,0
+akiobank_wallet_employee,akiobank_wallet_employee,model_wallet,akiobank.group_akiobank_employee,1,0,1,0
+akiobank_wallet_manager,akiobank_wallet_manager,model_wallet,akiobank.group_akiobank_manager,1,1,1,1
+
+akiobank_history_customer,akiobank_history_customer,model_trans_history,akiobank.group_akiobank_customer,1,0,0,0
+akiobank_history_employee,akiobank_history_employee,model_trans_history,akiobank.group_akiobank_employee,1,0,1,0
+akiobank_history_manager,akiobank_history_manager,model_trans_history,akiobank.group_akiobank_manager,1,1,1,1
+
+akiobank_schedule_customer,akiobank_schedule_customer,model_akio_schedule,akiobank.group_akiobank_customer,1,0,0,0
+akiobank_schedule_employee,akiobank_schedule_employee,model_akio_schedule,akiobank.group_akiobank_employee,1,0,1,0
+akiobank_schedule_manager,akiobank_schedule_manager,model_akio_schedule,akiobank.group_akiobank_manager,1,1,1,1

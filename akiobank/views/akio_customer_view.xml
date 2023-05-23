@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 	<data>
+<!--		<record id="action_mark_as_done" model="ir.actions.server">-->
+<!--			<field name="name">Mark As Done Akio</field>-->
+<!--			<field name="type">ir.actions.server</field>-->
+<!--			<field name="model_id" ref="model_akio_customer" />-->
+<!--			<field name="binding_model_id" ref="model_akio_customer" />-->
+<!--			<field name="binding_view_types">form</field>-->
+<!--			<field name="state">code</field>-->
+<!--			<field name="code">-->
+<!--				for record in records:-->
+<!--					record.vip_customer == True-->
+<!--			</field>-->
+<!--		</record>-->
+
 		<record id="tree_view_akio_customer" model="ir.ui.view">
 			<field name="name">Akio Customer Tree View</field>
 			<field name="model">akio.customer</field>
@@ -33,9 +46,13 @@
 								string="Send Money" type="action" />
 							<button name="akio_debug" string="Debug" type="object"
 								class="btn-primary" />
-							<!-- <button name="name_create" string="!Name Creat" type="object" 
-								class="btn-primary" /> -->
-							<button name="copy" string="Copy" type="object"
+							<button name="akio_sudo_create" string="Sudo Create" type="object"
+								class="btn-primary" />
+							<button name="akio_default_get" string="Default Get"
+								type="object" class="btn-primary" />
+<!--							<button name="copy" string="Copy" type="object"-->
+<!--								class="btn-primary" />-->
+							<button name="name_create" string="Name Create" type="object"
 								class="btn-primary" />
 							<button name="akio_browse" string="Browse" type="object"
 								class="btn-primary" />

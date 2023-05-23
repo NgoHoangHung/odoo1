@@ -16,14 +16,15 @@
 			<field name="name">Test2 List View</field>
 			<field name="model">test2</field>
 			<field name="arch" type="xml">
-				<!-- <header> -->
-				<!-- <button name="refresh" string="Refresh" type="object" -->
-				<!-- class="btn-primary" /> -->
-				<!-- </header> -->
+				<header>
+
+				</header>
 				<tree>
+					<field name="name" />
 					<field name="number" />
-					<!--					<field name="plus_test_depends_context" />-->
-					<field name="after" />
+					<!-- <field name="plus_test_depends_context" /> -->
+					<field name="logic_bool" />
+					<field name="after2" />
 					<field name="avatar" />
 					<field name="currency_id" />
 					<field name="class_fund" />
@@ -36,18 +37,27 @@
 			<field name="model">test2</field>
 			<field name="arch" type="xml">
 				<form>
-					<sheet>
+					<header>
 						<div>
-							<button name='reset_all' string="reset_all" type="object" class="btn-primary" />
-							<button name='plus2' string="plus2" type="object" class="btn-primary" />
-							<button name='only_plus' string="only_plus" type="object" class="btn-primary" />
+							<button name="test_offical" string="Offical" type="object"
+								class="btn-primary" />
+							<button name='reset_all' string="reset_all" type="object"
+								class="btn-primary" />
+							<button name='plus2' string="plus2" type="object"
+								class="btn-primary" />
+							<button name='only_plus' string="only_plus" type="object"
+								class="btn-primary" />
 						</div>
+					</header>
+					<sheet>
 						<field name="image" widget="image" />
 						<group>
 							<group>
+								<field name="name" />
 								<field name="number" />
-								<field name="after" />
-								<!--								<field name="plus_test_depends_context" />-->
+								<field name="after2" />
+								<field name="logic_bool" />
+								<!-- <field name="plus_test_depends_context" /> -->
 								<field name="reference" />
 							</group>
 							<group>
@@ -58,7 +68,9 @@
 						</group>
 						<notebook>
 							<page string="Prescription" name="prescription">
-								<field name="prescription" placeholder="Enter you prescription" options="{'collaborative':true,'resizable':true, 'codeview':true}" />
+								<field name="prescription"
+									placeholder="Enter you prescription"
+									options="{'collaborative':true,'resizable':true, 'codeview':true}" />
 							</page>
 
 						</notebook>
@@ -76,19 +88,22 @@
 					<field name='avatar' />
 					<field name="image" />
 					<field name="number" />
-					<field name="after" />
+					<field name="after2" />
 					<field name="id" />
 					<field name="image" />
 					<template>
 						<t t-name="kanban-box">
-							<div t-attf-class="oe_kanban_global_click o_kanban_record_has_image_fill">
-								<div class='o_kanban_image d-none d-md-block' t-attf-style="background-image:url('#{kanban_image('test2','image',record.id.raw_value,placeholder)}')">
+							<div
+								t-attf-class="oe_kanban_global_click o_kanban_record_has_image_fill">
+								<div class='o_kanban_image d-none d-md-block'
+									t-attf-style="background-image:url('#{kanban_image('test2','image',record.id.raw_value,placeholder)}')">
 
 
 									<!-- <div t-attf-class="oe_kanban_global_click oe_kanban_content"> -->
 									<!-- <div class='o_kanban_image'> -->
 									<!-- <img class="o_kanban_image_inner_pic" -->
-									<!-- t-att-src="kanban_image('test2','image',record.id.raw_value)" /> -->
+									<!-- t-att-src="kanban_image('test2','image',record.id.raw_value)" 
+										/> -->
 								</div>
 
 								<div class="oe_kanban_details">
@@ -103,7 +118,7 @@
 									</div>
 									<div class="oe_kanban_subtitle">
 
-										<t t-esc="'After: ' + record.after.value" />
+										<t t-esc="'After: ' + record.after2.value" />
 									</div>
 								</div>
 							</div>

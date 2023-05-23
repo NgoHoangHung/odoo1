@@ -1,5 +1,5 @@
 {
-    'name': "Hỗ trợ tài chính",# -*- coding: utf-8 -*-
+    'name': "Ngân Hàng ABC",# -*- coding: utf-8 -*-
     'version': '1.0',
     'summary': 'Odoo Learn ',
     'sequence': 1,
@@ -11,6 +11,9 @@
     'website': '',
     'depends': [],
     'data': [
+        'security/security.xml',
+        'security/ir.model.access.csv',
+        
         'wizard/akio_sendmoney_view.xml',
         
         'views/akio_customer_view.xml',

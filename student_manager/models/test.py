@@ -5,39 +5,51 @@ class Test2(models.Model):
     _name = 'test2'
     # _transient= True
     
+    name = fields.Char(string='Name')
     number = fields.Integer(string='Number')
-    after = fields.Integer(compute='_compute_acount', store=True)
+    # after = fields.Integer(compute='_compute_acount')#, store=True
+    after2 = fields.Integer(compute='_compute_acount1')  #
     avatar = fields.Binary(string='Avatar')
     prescription = fields.Html(string='Prescription')
     image = fields.Image(string='Logo', max_width=128, max_height=128)
     # test_id = fields.One2many(comodel_name = 'test3',inverse_name='test2_id')
-
+    logic_bool = fields.Boolean(string="Offical", default=False)
     currency_id = fields.Many2one('res.currency', string='Currency')
     class_fund = fields.Monetary(
         string='Class Fund', currency_field='currency_id')
 
     plus_test_depends_context = fields.Integer(compute="test_depends_context")
-
+    
+    def test_offical(self):
+        # for i in self:
+        if self.logic_bool:
+            self.logic_bool = False
+        else:
+             self.logic_bool = True
+    
     # mydate = fields.Date90
-    @api.depends('number')
+    # @api.depends('number')
     def _compute_acount(self):
         for r in self:
-            r.after = r.number * 2
-
+            r.after2 = r.number * 2
+            
+    # @api.depends('number')
+    def _compute_acount1(self):
+        for r in self:
+            r.after2 = r.number * 2
+            
     def reset_all(self):
         records = self.search([])
         for i in records:
             i.number = 1
 
     def only_plus(self):
-         self.number+=3
+         self.number += 3
 
     def plus2(self):
         records = self.search([])
         for i in records:
             i.number += 2
-    
-    
 
     # def refresh(self):
         # self.env[test2].flush_model()
@@ -98,4 +110,6 @@ class Test2(models.Model):
     #             'view_mode': 'form',
     #             'views': [[view_id, 'form']],
     #             }
+
+
 

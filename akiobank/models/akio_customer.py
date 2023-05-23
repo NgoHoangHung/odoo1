@@ -27,11 +27,20 @@ class AkioCustomer(models.Model):
                                  string="Ví"
                                  )
 
-    _sql_constraints = [
-        ('name_uniq', 'unique(phone)', 'Khách hàng chỉ có một số điện thoại'),
-        # ('price_pos', 'CHECK(price >=0)', 'Product price must be positive!')
-    ]
-
+    # _sql_constraints = [
+    #     ('name_uniq', 'unique(phone)', 'Khách hàng chỉ có một số điện thoại'),
+    #     # ('price_pos', 'CHECK(price >=0)', 'Product price must be positive!')
+    # ]
+    
+    def action_done(self):
+        for rec in self:
+            rec.vip_customer = False
+    def akio_sudo_create(self):
+        data = [
+            {'name':'q3'},
+            {'name':'q4'},
+            ]
+        return self.sudo().create(data)
     def akio_debug(self):
         print('hung')
         pass
@@ -48,28 +57,35 @@ class AkioCustomer(models.Model):
         print(vals['name'])
         return super(AkioCustomer, self).create(vals)
 
-    @api.returns('self', lambda value: value.id)
-    def copy(self, default=None):
-        default = dict(default or {})
-        if default.get('name', False):
-            print('up')
-            return super(AkioCustomer, self).copy(default)
-        try:
-            default.setdefault('name', _("%s (copy)") % (self.name or ''))
-            while self.env['akio.customer'].search([('name', '=', default['name'])], limit=1):
-                default['name'] = _("%s (copy)") % (self.name or '')
-        except ValueError:
-            default['name'] = self.name
-        print('down')
-        return super(AkioCustomer, self).copy(default)
-
+    # @api.returns('self', lambda value: value.id)
+    # def copy(self, default=None):
+    #     default = dict(default or {})
+    #     if default.get('name', False):
+    #         print('up')
+    #         return super(AkioCustomer, self).copy(default)
+    #     try:
+    #         default.setdefault('name', _("%s (copy)") % (self.name or ''))
+    #         while self.env['akio.customer'].search([('name', '=', default['name'])], limit=1):
+    #             default['name'] = _("%s (copy)") % (self.name or '')
+    #     except ValueError:
+    #         default['name'] = self.name
+    #     print('down')
+    #     return super(AkioCustomer, self).copy(default)
+            
     @api.model
     # ===========================================================================
     # name_create
     # ===========================================================================
     def name_create(self, name):
-        new_record = self.create({'name': name})
-        return new_record.name_get()[0]
+        size = self.search_count([])
+        data = self.default_get(['name']).get('name', False) + ' ' + str(size)
+        return  self.create({'name': data})
+        
+        # if self.default_get(['name']) != None:
+        #     input = self.default_get(['name'])
+        #     size = self.search_count([])
+        #     get_default_copy = input.get('name', False) + ' ' + str(size)
+        # return new_record.name_get()[0]
 
     def change_customer_type(self):
         records = self.env['akio.customer'].search([])
@@ -84,26 +100,36 @@ class AkioCustomer(models.Model):
     def write(self, vals):
         print('writing', vals)
         return super(AkioCustomer, self).write(vals)
-
+    
+    def akio_default_get(self):
+        print('________________________________________________________________')
+        print(self.default_get(['name']))
+    
     # ===========================================================================
     # akio_find_by_id
     # ===========================================================================
     def akio_browse(self):
+        print('________________________________________________________________')
         id = self.env['akio.customer'].browse(1)
         print(id)
+        print('________________________________________________________________')
 
     # ===========================================================================
     # akio_find_all
     # ===========================================================================
+        print('________________________________________________________________')
+
     def akio_find_all(self):
         find_all = self.env['akio.customer'].search([])
         a = find_all.read()
         print(a)
+        print('________________________________________________________________')
 
     # ===========================================================================
     # akio_read
     # ===========================================================================
     def akio_read(self):
+        print('________________________________________________________________')
         pass
         a = self.search([])
         for i in a:
@@ -117,8 +143,15 @@ class AkioCustomer(models.Model):
     # akio_search_count
     # ===========================================================================
     def akio_search_count(self):
+        print('________________________________________________________________')
         print('total curent record: ________________',
               self.env['akio.customer'].search_count([]))
+        
+        print('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^')
+        print('total curent record: ________________',
+              self.search_count([]))
+        
+        print('________________________________________________________________')
 
     # ===========================================================================
     # akio_read_group
@@ -136,14 +169,15 @@ class AkioCustomer(models.Model):
         #       mapping to a dictionary with keys: “from” (inclusive) and “to” (exclusive) mapping to a string representation of the temporal bounds of the group
     # ===========================================================================
     def akio_read_group(self):
+        print('________________________________________________________________')
         records = self.env['akio.customer'].search([]).read_group(
-            domain=[],
-            fields=['name', 'age'],
-            groupby=['name'],
+            domain=[('age', '>', 23)],
+            fields=['name', 'age', 'phone'],
+            groupby=['age'],
             offset=0,
             limit=None,
-            orderby=False,
-            lazy=True
+            orderby=None,
+            lazy=False
         )
         for i in records:
             print(i)
@@ -153,6 +187,7 @@ class AkioCustomer(models.Model):
     # find_by_domain0
     # ===========================================================================
     def find_by_domain0(self):
+        print('________________________________________________________________')
         records = self.env['akio.customer'].search(
             [('age', '=', '25')], offset=0, limit=None, order='name desc', count=False)
         for i in records:
@@ -163,6 +198,7 @@ class AkioCustomer(models.Model):
         print('________________________________________________________________________________________________________________________________')
 
     def find_by_domain1(self):
+        print('________________________________________________________________')
         records = self.env['akio.customer'].search(
             [('name', '!=', 'A')], offset=0, limit=None, order='name desc', count=False)
         for i in records:
@@ -332,12 +368,27 @@ class AkioCustomer(models.Model):
     # cần lấy ra một danh sách các bản ghi của một model trước rồi mới tiến hành .mapped
     # ===========================================================================
     def akio_mapped(self):
+        print('_________________________________________________________________')
         records = self.env['akio.customer'].search([])
         list_name = records.mapped('name')
-        records_relative = records.mapped('wallet_id')
+     
+        records_relative = records.mapped('wallet_ids')
         union_relative = records.mapped('')  # -> recordset & remove dupplicate
-        print(list_name)
-        print(records_relative)
+        print('list_name = ' , list_name)
+        print('_________________________________________________________________') 
+        print('records_relative = ', records_relative)
+        print('_________________________________________________________________') 
+        for record in records:
+            
+            records_relative_wallet = record.mapped('wallet_ids.akio_schedule_ids')
+            print(records_relative_wallet)
+        print('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^') 
+        
+        print('_________________________________________________________________') 
+        test = self.env['wallet'].search([])
+        test_relative = test.akio_customer_id.mapped('name')
+        print('akio_customer_id.mapped(name): ', test_relative)
+        print('_________________________________________________________________') 
 
     def akio_sort(self):
         recordset = self.env['akio.customer'].search([])
@@ -346,7 +397,6 @@ class AkioCustomer(models.Model):
         print(recordset.sorted(key=None, reverse=True))
         print('-------------------------------------------')
         print(recordset.sorted(key='name', reverse=True))
-        
     
     # ===========================================================================
     # #===========================================================================

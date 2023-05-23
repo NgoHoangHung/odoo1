@@ -115,3 +115,5 @@ class Wallet(models.Model):
                  Command.unlink(14)
                  ]})           
         
+    def akio_link3(self):
+        pass
