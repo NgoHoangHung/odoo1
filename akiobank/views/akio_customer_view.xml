@@ -50,8 +50,8 @@
 								class="btn-primary" />
 							<button name="akio_default_get" string="Default Get"
 								type="object" class="btn-primary" />
-<!--							<button name="copy" string="Copy" type="object"-->
-<!--								class="btn-primary" />-->
+							<button name="copy" string="Copy" type="object"
+								class="btn-primary" />
 							<button name="name_create" string="Name Create" type="object"
 								class="btn-primary" />
 							<button name="akio_browse" string="Browse" type="object"

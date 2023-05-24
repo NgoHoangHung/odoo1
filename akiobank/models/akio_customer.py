@@ -27,10 +27,15 @@ class AkioCustomer(models.Model):
                                  string="Ví"
                                  )
 
-    # _sql_constraints = [
-    #     ('name_uniq', 'unique(phone)', 'Khách hàng chỉ có một số điện thoại'),
-    #     # ('price_pos', 'CHECK(price >=0)', 'Product price must be positive!')
-    # ]
+    '''
+    _sql_constraints = [
+        ('name_uniq', 'unique(phone)', 'Khách hàng chỉ có một số điện thoại'),
+        # ('price_pos', 'CHECK(price >=0)', 'Product price must be positive!')
+    ]
+    muốn xóa constraint: alter table tên bảng
+            drop constraint <tên bảng>_<tên ràng buộc>
+
+    '''
     
     def action_done(self):
         for rec in self:
@@ -46,8 +51,7 @@ class AkioCustomer(models.Model):
         pass
 
     def _default_name(self):
-        print(self.get_value())
-        # return self.get_value()
+        pass
 
     @api.model
     def create(self, vals):
@@ -57,28 +61,29 @@ class AkioCustomer(models.Model):
         print(vals['name'])
         return super(AkioCustomer, self).create(vals)
 
-    # @api.returns('self', lambda value: value.id)
-    # def copy(self, default=None):
-    #     default = dict(default or {})
-    #     if default.get('name', False):
-    #         print('up')
-    #         return super(AkioCustomer, self).copy(default)
-    #     try:
-    #         default.setdefault('name', _("%s (copy)") % (self.name or ''))
-    #         while self.env['akio.customer'].search([('name', '=', default['name'])], limit=1):
-    #             default['name'] = _("%s (copy)") % (self.name or '')
-    #     except ValueError:
-    #         default['name'] = self.name
-    #     print('down')
-    #     return super(AkioCustomer, self).copy(default)
+    @api.returns('self', lambda value: value.id)
+    def copy(self, default=None):
+        default = dict(default or {})
+        if default.get('name', False):
+            print('up')
+            return super(AkioCustomer, self).copy(default)
+        try:
+            default.setdefault('name', _("%s (copy)") % (self.name or ''))
+            while self.env['akio.customer'].search([('name', '=', default['name'])], limit=1):
+                default['name'] = _("%s (copy)") % (self.name or '')
+        except ValueError:
+            default['name'] = self.name
+        print('down')
+        return super(AkioCustomer, self).copy(default)
             
     @api.model
     # ===========================================================================
     # name_create
     # ===========================================================================
     def name_create(self, name):
-        size = self.search_count([])
-        data = self.default_get(['name']).get('name', False) + ' ' + str(size)
+        # size = self.search_count([])
+        id = self.search([],order = 'id desc',limit = 1).id + 1
+        data = self.default_get(['name']).get('name', False) + ' ' + str(id)
         return  self.create({'name': data})
         
         # if self.default_get(['name']) != None:
@@ -176,9 +181,11 @@ class AkioCustomer(models.Model):
             groupby=['age'],
             offset=0,
             limit=None,
-            orderby=None,
-            lazy=False
+            orderby='id',
+            lazy=False,
         )
+        #     context = {'name':"Nguyễn Văn A"},
+        #     range = {'age':{'from' :20 , 'to':30}}
         for i in records:
             print(i)
             print('__________________________________________________________')
@@ -363,6 +370,8 @@ class AkioCustomer(models.Model):
         records = self.wallet_ids.filtered_domain([])
         pass
 
+    def akio_mapped_test(self,field):
+        return field
     # ===========================================================================
     # akio_mapped:trả về một recordset hoặc một list. các trường quan hệ sẽ trả về recordset
     # cần lấy ra một danh sách các bản ghi của một model trước rồi mới tiến hành .mapped
@@ -370,6 +379,11 @@ class AkioCustomer(models.Model):
     def akio_mapped(self):
         print('_________________________________________________________________')
         records = self.env['akio.customer'].search([])
+        field ='name'
+        result = records.mapped(self.akio_mapped_test(field))
+        print(result)
+      
+        print('_________________________________________________________________')
         list_name = records.mapped('name')
      
         records_relative = records.mapped('wallet_ids')
