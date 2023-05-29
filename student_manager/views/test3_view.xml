@@ -8,7 +8,9 @@
 			<field name="arch" type="xml">
 				<tree>
 					<field name="name" />
-					<field name="number" />
+					<field name="origin_price" />
+					<field name="discount" />
+					<field name="sale_price" />
 				</tree>
 			</field>
 		</record>
@@ -23,7 +25,9 @@
 						<group>
 							<group>
 								<field name="name" />
-								<field name="number" />
+								<field name="origin_price" />
+								<field name="discount" />
+								<field name="sale_price" />
 							</group>
 						</group>
 					</sheet>

@@ -3,7 +3,7 @@ from odoo import api, fields, models, Command
 
 class Wallet(models.Model):
     _name = "wallet"
-    _rec_name = 'akio_customer_id'
+    _rec_name = 'accountnumber'
 
     accountnumber = fields.Char(
         string="Số Tài Khoản", compute='accountnumber_gen', store=True) 
@@ -14,7 +14,7 @@ class Wallet(models.Model):
                                  ('acb', 'Á Châu Bank'),
                                  ('tech', 'Techcom Bank')
                                   ], string="Ngân Hàng")
-
+    active = fields.Boolean(default = "True")
     akio_customer_id = fields.Many2one(comodel_name="akio.customer",
                                        ondelete='set null',
                                        string="Khách Hàng")
@@ -26,7 +26,10 @@ class Wallet(models.Model):
         inverse_name='wallet_id',
         string="Schedule"
         )
-
+    
+    def is_balance(self):
+        return True if self.balance > 50000 else False
+    
     @api.depends('bank_name', 'akio_customer_id.phone')
     def accountnumber_gen(self):
         for record in self:

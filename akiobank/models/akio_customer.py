@@ -8,9 +8,7 @@ import re
 
 class AkioCustomer(models.Model):
     _name = "akio.customer"
-
-    name = fields.Char(string="Họ và Tên ", required=True,
-                       default='Hùng đẹp trai')
+    name = fields.Char(string="Họ và Tên ", required=True, inverse = '_inverse_name')
     age = fields.Integer(string="Tuổi")
     phone = fields.Char('Số Điện Thoại')
     address = fields.Text(string="Địa chỉ")
@@ -27,16 +25,20 @@ class AkioCustomer(models.Model):
                                  string="Ví"
                                  )
 
-    '''
     _sql_constraints = [
-        ('name_uniq', 'unique(phone)', 'Khách hàng chỉ có một số điện thoại'),
-        # ('price_pos', 'CHECK(price >=0)', 'Product price must be positive!')
+        ('phone_uniq', 'unique(phone)', 'Bị trùng số điện thoại'),
     ]
+    '''
+        # ('price_pos', 'CHECK(price >=0)', 'Product price must be positive!')
     muốn xóa constraint: alter table tên bảng
             drop constraint <tên bảng>_<tên ràng buộc>
 
     '''
     
+    def _inverse_name(self):
+        for record in self:
+            record.name = "haha"
+        
     def action_done(self):
         for rec in self:
             rec.vip_customer = False

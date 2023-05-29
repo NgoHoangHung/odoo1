@@ -27,6 +27,9 @@
         'views/custom_model_view.xml',
         'views/test2.xml',
         'views/test3_view.xml',
+        'views/a_view.xml',
+        'views/b_view.xml',
+        'views/c_view.xml',
 
         
         'views/student_menus.xml',

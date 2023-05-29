@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="tree_view_akio_customer_inherit" model="ir.ui.view">
+			<field name="name">Akio Customer Tree View Inherit</field>
+			<field name="model">akio.customer</field>
+			<field name="inherit_id" ref="akiobank.tree_view_akio_customer" />
+			<field name="arch" type="xml">
+				<data>
+					<xpath expr="//field[@name= 'address']" position="after">
+						<field name='local' />
+					</xpath>
+				</data>
+			</field>
+		</record>
+
+	</data>
+</odoo>

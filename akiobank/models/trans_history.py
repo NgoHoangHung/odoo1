@@ -10,10 +10,10 @@ class TransHistory(models.Model):
     _rec_name = 'wallet_id'
     # name = fields.Char(string="Lịch Sử Giao Dịch")
     trans_type = fields.Selection([
-        ('0', 'Chuyển tiền'),
-        ('1', 'Nhận tiền')
-        #   ('2','Gửi Tiết Kiệm'),
-        #   ('3','Thanh Toán Hóa Đơn')
+        ('0', 'Chuyển tiền đến'),
+        ('1', 'Nhận tiền từ'),
+        ('2','Rút Tiền'),
+        ('3','Nạp Tiền')
     ], string="Loại Giao Dịch", default='0')
     deposit = fields.Float(string="Số Tiền")
     creat_at = fields.Datetime(

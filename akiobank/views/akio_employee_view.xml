@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+		<record id="tree_view_akio_employee" model="ir.ui.view">
+			<field name="name">Akio Employee Tree View</field>
+			<field name="model">akio.employee</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="name" />
+					<field name="age" />
+					<field name="address" />
+					<field name="gender" />
+					<field name="phone" />
+					<field name="vip_customer" />
+					<field name="job" />
+					<field name="experience" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="form_view_akio_employee" model="ir.ui.view">
+			<field name="name">Akio Employee Form View</field>
+			<field name="model">akio.employee</field>
+			<field name="arch" type="xml">
+				<form>
+					<sheet>
+						<group>
+							<group>
+								<field name="name" />
+								<field name="age" />
+								<field name="address" />
+								<field name="gender" />
+								<field name="phone" />
+							</group>
+							<group>
+								<field name="job" />
+								<field name="parent_id" />
+								<field name="experience" />
+								<field name="vip_customer" />
+							</group>
+						</group>
+						<notebook>
+							<page string="My Wallet">
+								<field name="wallet_ids">
+									<tree editable='bottom'>
+										<field name="bank_name" readonly="1" />
+										<field name="accountnumber" readonly="1" />
+										<field name="balance" readonly="1" />
+										<field name="password" readonly="1" />
+									</tree>
+								</field>
+							</page>
+						</notebook>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="graph_view_akio_employee" model="ir.ui.view">
+			<field name="name">Graph View Akio Employee</field>
+			<field name="model">akio.employee</field>
+			<field name="arch" type="xml">
+				<graph string="employee Graph" type="line">
+					<field name="wallet_ids" />
+				</graph>
+			</field>
+		</record>
+
+		<record id="pivot_view_akio_employee" model="ir.ui.view">
+			<field name="name">Pivot View Akio Employee</field>
+			<field name="model">akio.employee</field>
+			<field name="arch" type="xml">
+				<pivot string="Akio Employee" sample="1">
+					<field name="name" type="row" />
+				</pivot>
+			</field>
+		</record>
+
+		<record id="view_search_akio_employee" model="ir.ui.view">
+			<field name="name">Search View Akio Employee</field>
+			<field name="model">akio.employee</field>
+			<field name="arch" type="xml">
+				<search string="Akio Employee">
+					<field name="name" filter_domain="[('name','ilike',self)]"
+						string="employee" />
+					<separator />
+					<filter name="vip_customer" string="VIP"
+						domain="[('vip_customer', '=', False)]" />
+					<group>
+						<filter string='Gender' name='group_employee_id'
+							context="{'group_by':'gender'}" />
+					</group>
+
+				</search>
+			</field>
+		</record>
+
+		<record id="kanban_view_akio_employee" model="ir.ui.view">
+			<field name="name">Kanban View Akio Employee</field>
+			<field name="model">akio.employee</field>
+			<field name="arch" type="xml">
+				<kanban>
+					<field name="name" />
+					<field name="age" />
+					<field name="gender" />
+					<template>
+						<t t-name="kanban-box">
+							<div t-attf-class="oe_kanban_global_click oe_kanban_content">
+								<div class="oe_kanban_details">
+
+									<div class="oe_kanban_title">
+
+										<t t-esc="record.name.value" />
+									</div>
+									<div class="oe_kanban_subtitle">
+
+										<t t-esc="'Age: ' + record.age.value" />
+									</div>
+									<div class="oe_kanban_subtitle">
+
+										<t t-esc="'Gender: ' + record.gender.value" />
+									</div>
+								</div>
+							</div>
+						</t>
+					</template>
+				</kanban>
+			</field>
+		</record>
+
+		<record id="akiobank_employee_view_action"
+			model="ir.actions.act_window">
+			<field name="name">Akio Employee Bank</field>
+			<field name="res_model">akio.employee</field>
+			<field name="view_mode">tree,form,kanban,graph,pivot,search</field>
+		</record>
+	</data>
+
+</odoo>

@@ -5,12 +5,18 @@
             <field name="name">Trans History Tree View</field>
             <field name="model">trans.history</field>
             <field name="arch" type="xml">
-                <tree>
-                    <field name="trans_type"/>
+                <tree decoration-success = "trans_type == '0'">
+                    <field name="trans_type"
+                    	decoration-success = "trans_type == '0'"
+                    	decoration-info = "trans_type == '1'"
+                    	decoration-danger = "trans_type == '2'"
+                    	decoration-warning = "trans_type == '3'"
+                    	widget = "badge"
+                    	/>
                     <field name="deposit"/>
                     <field name="creat_at" readonly="1"/>
                     <field name="wallet_id" />
-
+					
                 </tree>
             </field>
         </record>

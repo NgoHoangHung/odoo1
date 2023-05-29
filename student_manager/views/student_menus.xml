@@ -38,6 +38,14 @@
 
 			<menuitem id="student_manager_test3_menu"
 				name="Test3" action="test3_action" sequence="3" />
+
+			<menuitem id="student_manager_a_menu"
+				name="A" action="student_manager_a_action" sequence="4" />
+			<menuitem id="student_manager_b_menu"
+				name="B" action="student_manager_b_action" sequence="5" />
+			<menuitem id="student_manager_c_menu"
+				name="C" action="student_manager_c_action" sequence="6" />
+				
 		</menuitem>
 
 	</menuitem>

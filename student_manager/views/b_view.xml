@@ -1,0 +1,23 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<odoo>
+	<data>
+		<record id="tree_view_b" model="ir.ui.view">
+			<field name="name">B Tree View</field>
+			<field name="model">b</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="name" />
+					<field name="age" />
+					<field name="phone" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="student_manager_b_action"
+			model="ir.actions.act_window">
+			<field name="name">B</field>
+			<field name="res_model">b</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+	</data>
+</odoo>

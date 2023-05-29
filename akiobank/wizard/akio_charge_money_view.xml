@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="akio_charge_money_form_view" model="ir.ui.view">
+			<field name="name">Akio Transation Charge Money</field>
+			<field name="model">akio.transaction</field>
+			<field name="arch" type="xml">
+				<form string="Akio Transation Charge Money">
+					<group>
+						<field name="deposit" required='1' string="Số Tiền Nạp"/>
+					</group>
+					<footer>
+						<button string="Charge" type="object" name="charge_money"
+							class="btn-primary" />
+						<button string="cancel" special="cancel"
+							class="btn-secondary" />
+					</footer>
+				</form>
+			</field>
+		</record>
+
+		<record id="akio_charge_money_trans_action"
+			model="ir.actions.act_window">
+			<field name="name">Akio Transation Charge Money</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">akio.transaction</field>
+			<field name="view_mode">form</field>
+<!--			<field name="view_id" ref="akio_charge_money_form_view" />-->
+			<field name="target">new</field>
+		</record>
+
+		<record id="charge_money_trans_action"
+			model="ir.actions.act_window.view">
+			<field name="sequence" eval="1" />
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="akio_charge_money_form_view" />
+			<field name="act_window_id"
+				ref="akio_charge_money_trans_action" />
+		</record>
+
+	</data>
+
+</odoo>

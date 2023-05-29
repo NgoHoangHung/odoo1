@@ -12,14 +12,24 @@ class Test3(models.Model):
     # parent_path = fields.Char(required=True)
 
     name = fields.Char('Name')
-    number = fields.Integer('Number')
-    #
-    # state = fields.Selection(string='Status', selection=[('new', 'New'),
-    #                                                     ('studying', 'Studying'),
-    #                                                     ('off', 'Off')],
-    #                                                 default='new')
-    # test2_id = fields.Many2one('test2', string='Level',
-    #                                    states={'new': [('invisible', True),('readonly', True)],
-    #                                            'studying': [('invisible', False),('readonly', True)],
-    #                                            'off': [('invisible', True),('readonly', True)]})
+    origin_price = fields.Float('Giá Gốc')
+    # profit_rate= fields.Float('Tỉ Lệ Lãi')
+    discount = fields.Float('Giảm Giá')
+    sale_price = fields.Float('Giá Bán', compute="_sale_price", inverse="_recompute_price", store=True, readonly=False)
+    # sale_discount= fields.Float('Giá Còn')
     
+    def _recompute_price(self):
+        for i in self: 
+            i.origin_price = i.sale_price / (1- i.discount)
+    
+    @api.depends('origin_price', 'discount')
+    def _sale_price(self):
+        for i in self:
+            i.sale_price = i.origin_price - i.origin_price * i.discount
+    #===========================================================================
+    #===========================================================================
+    #===========================================================================
+    # # # End
+    #===========================================================================
+    #===========================================================================
+    #===========================================================================

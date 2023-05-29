@@ -8,7 +8,7 @@ class Test2(models.Model):
     name = fields.Char(string='Name')
     number = fields.Integer(string='Number')
     # after = fields.Integer(compute='_compute_acount')#, store=True
-    after2 = fields.Integer(compute='_compute_acount1')  #
+    after2 = fields.Integer(compute='_compute_acount1', store=True)  #
     avatar = fields.Binary(string='Avatar')
     prescription = fields.Html(string='Prescription')
     image = fields.Image(string='Logo', max_width=128, max_height=128)
@@ -27,13 +27,9 @@ class Test2(models.Model):
         else:
              self.logic_bool = True
     
-    # mydate = fields.Date90
-    # @api.depends('number')
-    def _compute_acount(self):
-        for r in self:
-            r.after2 = r.number * 2
+
             
-    # @api.depends('number')
+    @api.depends('number')
     def _compute_acount1(self):
         for r in self:
             r.after2 = r.number * 2
