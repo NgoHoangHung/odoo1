@@ -8,7 +8,7 @@ import re
 
 class AkioCustomer(models.Model):
     _name = "akio.customer"
-    name = fields.Char(string="Họ và Tên ", required=True, inverse = '_inverse_name')
+    name = fields.Char(string="Họ và Tên ",)#, inverse = '_inverse_name'
     age = fields.Integer(string="Tuổi")
     phone = fields.Char('Số Điện Thoại')
     address = fields.Text(string="Địa chỉ")
@@ -16,7 +16,7 @@ class AkioCustomer(models.Model):
         ("male", "Male"),
         ("female", "Female")
     ], string="Giới Tính")
-    vip_customer = fields.Boolean('VIP', default=True)
+    vip_customer = fields.Boolean('VIP')
     avartar = fields.Binary(string='Avatar')
     image = fields.Image(string='Icon', max_width=128, max_height=128)
      
@@ -25,19 +25,44 @@ class AkioCustomer(models.Model):
                                  string="Ví"
                                  )
 
-    _sql_constraints = [
-        ('phone_uniq', 'unique(phone)', 'Bị trùng số điện thoại'),
-    ]
+    # _sql_constraints = [
+    #     ('phone_uniq', 'unique(phone)', 'Bị trùng số điện thoại'),
+    # ]
+    # @api.model
+    # def create(self,vals):
+    #     try:
+    #         if _check_phone(vals):
+    #
+    #
+    #     except()
+    
+   
+    
+    @api.model
+    def create(self,vals):
+        return super().create(vals)
+    @api.constrains('phone')
+    def _check_phone(self):
+        print('__________________________________')
+        phones = self.env['akio.customer'].search([('id','not in',self.ids)]).mapped('phone')
+        for i in self:
+            if i.phone in phones:
+                raise exceptions.ValidationError("SDT bị trùng")
     '''
         # ('price_pos', 'CHECK(price >=0)', 'Product price must be positive!')
     muốn xóa constraint: alter table tên bảng
             drop constraint <tên bảng>_<tên ràng buộc>
 
     '''
-    
-    def _inverse_name(self):
+    @api.constrains('name')
+    def _check_enter_name(self):
         for record in self:
-            record.name = "haha"
+            if not record.name:
+                raise exceptions.ValidationError('ten ko dc de trong')
+    
+    # def _inverse_name(self):
+    #     for record in self:
+    #         record.name = "haha"
         
     def action_done(self):
         for rec in self:
@@ -49,44 +74,43 @@ class AkioCustomer(models.Model):
             ]
         return self.sudo().create(data)
     def akio_debug(self):
-        print('hung')
         pass
-
+    
     def _default_name(self):
-        pass
+        passpython
 
-    @api.model
-    def create(self, vals):
-        for val in vals:
-            vals['name'] = vals['name'].title()
-        print('creating')
-        print(vals['name'])
-        return super(AkioCustomer, self).create(vals)
+    # @api.model
+    # def create(self, vals):
+    #     for val in vals:
+            # vals['name'] = vals['name'].title()
+        # print('creating')
+        # print(vals['name'])
+        # return super(AkioCustomer, self).create(vals)
 
-    @api.returns('self', lambda value: value.id)
-    def copy(self, default=None):
-        default = dict(default or {})
-        if default.get('name', False):
-            print('up')
-            return super(AkioCustomer, self).copy(default)
-        try:
-            default.setdefault('name', _("%s (copy)") % (self.name or ''))
-            while self.env['akio.customer'].search([('name', '=', default['name'])], limit=1):
-                default['name'] = _("%s (copy)") % (self.name or '')
-        except ValueError:
-            default['name'] = self.name
-        print('down')
-        return super(AkioCustomer, self).copy(default)
+    # @api.returns('self', lambda value: value.id)
+    # def copy(self, default=None):
+    #     default = dict(default or {})
+    #     if default.get('name', False):
+    #         print('up')
+    #         return super(AkioCustomer, self).copy(default)
+    #     try:
+    #         default.setdefault('name', _("%s (copy)") % (self.name or ''))
+    #         while self.env['akio.customer'].search([('name', '=', default['name'])], limit=1):
+    #             default['name'] = _("%s (copy)") % (self.name or '')
+    #     except ValueError:
+    #         default['name'] = self.name
+    #     print('down')
+    #     return super(AkioCustomer, self).copy(default)
             
-    @api.model
-    # ===========================================================================
-    # name_create
-    # ===========================================================================
-    def name_create(self, name):
-        # size = self.search_count([])
-        id = self.search([],order = 'id desc',limit = 1).id + 1
-        data = self.default_get(['name']).get('name', False) + ' ' + str(id)
-        return  self.create({'name': data})
+    # @api.model
+    # # ===========================================================================
+    # # name_create
+    # # ===========================================================================
+    # def name_create(self, name):
+    #     # size = self.search_count([])
+    #     id = self.search([],order = 'id desc',limit = 1).id + 1
+    #     data = self.default_get(['name']).get('name', False) + ' ' + str(id)
+    #     return  self.create({'name': data})
         
         # if self.default_get(['name']) != None:
         #     input = self.default_get(['name'])
@@ -422,3 +446,4 @@ class AkioCustomer(models.Model):
     # #===========================================================================
     #
     # ===========================================================================
+    

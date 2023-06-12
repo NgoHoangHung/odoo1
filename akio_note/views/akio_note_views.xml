@@ -1,0 +1,42 @@
+<odoo>
+
+	<!-- Note Stage Form View -->
+	<record id="akio_note_stage_form" model="ir.ui.view">
+		<field name="name">Akio Note Stage Form View</field>
+		<field name="model">akio.note.stage</field>
+		<field name="arch" type="xml">
+			<form string="Akio Stage of Note Form">
+				<group>
+					<field name='name' />
+					<field name='fold' />
+				</group>
+			</form>
+		</field>
+	</record>
+
+	<!--Akio Note Stage Tree View -->
+	<record id="akio_note_stage_form" model="ir.ui.view">
+		<field name="name">Akio Note Stage Tree View</field>
+		<field name="model">akio.note.stage</field>
+		<field name="arch" type="xml">
+			<tree string="Akio Stage of Note Tree" editable="bottom">
+				<field name="sequence" widget="handle" />
+				<field name="name" />
+				<field name="fold" />
+			</tree>
+		</field>
+	</record>
+	<!--Akio Note Stage Action -->
+	<record id="action_akio_note_stage"
+		model="ir.actions.act_window">
+		<field name="name">Akio Note Stages</field>
+		<field name="res_model">akio.note.stage</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+	
+	<menuitem id="akionote_root_menu" name="Akio Note">
+			<menuitem id="akiobank_customer_menu" name="Customer List"
+				action="akiobank_customer_view_action" sequence="1" />
+		
+	</menuitem>
+</odoo>

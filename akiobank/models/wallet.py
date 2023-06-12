@@ -14,7 +14,7 @@ class Wallet(models.Model):
                                  ('acb', 'Á Châu Bank'),
                                  ('tech', 'Techcom Bank')
                                   ], string="Ngân Hàng")
-    active = fields.Boolean(default = "True")
+    active = fields.Boolean(default="True")
     akio_customer_id = fields.Many2one(comodel_name="akio.customer",
                                        ondelete='set null',
                                        string="Khách Hàng")
@@ -26,14 +26,21 @@ class Wallet(models.Model):
         inverse_name='wallet_id',
         string="Schedule"
         )
-    
+    @api.constrains('akio_customer_id.age')
+    def _check_age(self):
+        for i in self:
+            if i.akio_customer_id.age <= 18:
+                 raise exceptions.ValidationError("Không tạo tài khoản với người dưới 18 tuổi")
+        
     def is_balance(self):
-        return True if self.balance > 50000 else False
+        self.bank_name = self.bank_name + str(11)
+        print(self.bank_name)
+        # return True if self.balance > 50000 else False
     
     @api.depends('bank_name', 'akio_customer_id.phone')
     def accountnumber_gen(self):
         for record in self:
-            self.accountnumber = str(self.bank_name) + str(self.akio_customer_id.phone)
+            record.accountnumber = str(record.bank_name) + str(record.akio_customer_id.phone)
     
     def is_cal(self):
         return True if self.balance > 0 else False
@@ -73,7 +80,7 @@ class Wallet(models.Model):
         
     #===========================================================================
     # Command.update: Lệnh này cần phải có thêm một thông số là id của bản ghi nữa.
-    #Chú ý rằng: mặc dù các bản ghi đang thao tác đang không có khóa liên kết tới nhưng
+    # Chú ý rằng: mặc dù các bản ghi đang thao tác đang không có khóa liên kết tới nhưng
     # khi thử thay đổi cả những bản ghi ấy thì nó lại thay đổi được.
     #
     #  Return: Cập nhật record đã tồn tại có ID là id với giá trị sẽ cập nhật là values.
@@ -88,7 +95,8 @@ class Wallet(models.Model):
             'akio_interest_rate': 8.0
             }  
         self.write({
-             'akio_schedule_ids':[Command.update(17,detail_vals)]})    
+             'akio_schedule_ids':[Command.update(17, detail_vals)]})    
+
     #===========================================================================
     # Command.delete:   Chỉ cần id của bản ghi
     # Return : Xóa bản ghi có mối quan hệ và xóa cả mối quan hệ với self. 

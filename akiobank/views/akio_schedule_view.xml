@@ -97,12 +97,29 @@
 				</calendar>
 			</field>
 		</record>
+		<record id="gantt_view_akio_schedule" model="ir.ui.view">
+			<field name="name">Gantt View Akio Schedule</field>
+			<field name="model">akio.schedule</field>
+			<field name="arch" type="xml">
+				<gantt string="Schedule Gantt" date_start="create_at"
+					date_stop="estimate_at" progress="progress"
+					default_group_by="wallet_id">
+					<field name="name" />
+					<field name="create_at" />
+					<field name="estimate_at" />
+					<field name="wallet_id" />
+					<field name="akio_interest_rate" />
+				</gantt>
+			</field>
+		</record>
+
+
 
 		<record id="akiobank_schedule_view_action"
 			model="ir.actions.act_window">
 			<field name="name">Schedule</field>
 			<field name="res_model">akio.schedule</field>
-			<field name="view_mode">tree,form,calendar,graph</field>
+			<field name="view_mode">tree,form,calendar,graph,gantt</field>
 
 		</record>
 

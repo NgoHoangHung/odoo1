@@ -4,7 +4,7 @@ class My_Partner(models.Model):
     _inherit= 'res.partner'
     
     @api.model
-    def create(selfself,vals):
+    def create(self,vals):
         print("User Env",self.env)
         print("User Env",self.env.user)
         print("User Env",self.env.company)

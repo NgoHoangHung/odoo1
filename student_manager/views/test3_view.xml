@@ -20,7 +20,12 @@
 			<field name="model">test3</field>
 			<field name="arch" type="xml">
 				<form>
-
+					<header>
+						<div>
+							<button name="test3_debug" string="Debug" type="object"
+								class="btn-primary" />
+						</div>
+					</header>
 					<sheet>
 						<group>
 							<group>
@@ -28,8 +33,23 @@
 								<field name="origin_price" />
 								<field name="discount" />
 								<field name="sale_price" />
+								<field name="test_onchange" />
 							</group>
 						</group>
+						<notebook>
+							<page string='Test2'>
+								<field name='test2_ids'>
+									<tree editable='bottom'>
+										<field name="name" />
+										<field name="number" />
+										<field name="logic_bool" />
+										<field name="after2" />
+										<field name="avatar" />
+									</tree>
+								</field>
+							</page>
+						</notebook>
+
 					</sheet>
 				</form>
 			</field>

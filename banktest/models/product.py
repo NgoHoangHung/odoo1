@@ -17,7 +17,7 @@ class Product(models.Model):
                                 string='Warranty')
     vat = fields.Float(default=0.1, string='VAT')
     revenue = fields.Float(compute='_onchange_price')
-    price_with_tax = fields.Float(string='Price Tax', compute="get_price_with_tax", store=True)
+    price_with_tax = fields.Float(string='Price Tax', compute="get_price_with_tax")#, store=True
     amount = fields.Integer(string='amount')
     active = fields.Boolean(string='Active', default=True)
     supplier_ids = fields.Many2many(comodel_name='supplier', relation='supplier_product_rel',
@@ -30,6 +30,7 @@ class Product(models.Model):
     ]
 
     @api.depends('price', 'vat')
+    # @api.depends()
     def get_price_with_tax(self):
         for product in self:
             if product.price:

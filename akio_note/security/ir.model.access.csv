@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_akio_note_stage,access_akio_note_stage,model_akio_note_stage,base.group_user,1,1,1,1

@@ -6,7 +6,7 @@ class Class_Detail(models.Model):
 
     name = fields.Integer(string='Information')
     amount = fields.Integer(string='Size',
-                            compute='check_size',
+                            compute='check_size',    
                             store=True)
     
     # state = fields.Selection(string='Status',

@@ -29,7 +29,7 @@
 			<field name="arch" type="xml">
 				<form>
 					<header>
-						<div>
+						<div groups = 'akiobank.group_akiobank_manager'>
 
 							<button name="akio_debug" string="Debug" type="object"
 								class="btn-primary" />
@@ -37,10 +37,10 @@
 								type="object" class="btn-primary" />
 							<button name="akio_default_get" string="Default Get"
 								type="object" class="btn-primary" />
-							<button name="copy" string="Copy" type="object"
-								class="btn-primary" />
-							<button name="name_create" string="Name Create"
-								type="object" class="btn-primary" />
+<!-- 							<button name="copy" string="Copy" type="object" -->
+<!-- 								class="btn-primary" /> -->
+<!-- 							<button name="name_create" string="Name Create" -->
+<!-- 								type="object" class="btn-primary" /> -->
 							<button name="akio_browse" string="Browse" type="object"
 								class="btn-primary" />
 							<button name="akio_find_all" string="Find All"
@@ -190,12 +190,14 @@
 					</template>
 				</kanban>
 			</field>
+			
 		</record>
 
 		<record id="akiobank_customer_view_action"
 			model="ir.actions.act_window">
 			<field name="name">Akio Customer Bank</field>
 			<field name="res_model">akio.customer</field>
+			<field name="search_view_id" ref="view_search_akio_customer" />
 			<field name="view_mode">tree,form,kanban,graph,pivot,search</field>
 		</record>
 	</data>

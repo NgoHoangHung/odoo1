@@ -7,4 +7,5 @@ class A(models.Model):
    
    name = fields.Char("amodel",require = True)
    age = fields.Integer()
-   rel_test3 = fields.Many2one('test3',string = "testtest",ondelete = 'cascade')
+   rel_test3 = fields.Many2one('test3',string = "test",ondelete = 'cascade')
+   
